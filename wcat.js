@@ -15,19 +15,22 @@ for(let i = 0; i < inputArr.length;i++) {
     }
 }
 
-if(optArr.includes("-n") && optArr.includes("-b")){
-    console.log("Error : -s and -b can't run simultaneously");
-    return;
-}
+
 let content = fileContObj.contFn(fileArr);
 
 if(optArr.includes("-s")){
     content = s_cmdObj.sFunc(content);
 }
-if(optArr.includes("-n")){
+if(optArr.includes("-n") && optArr.includes("-b")){
+    if(optArr.indexOf("-n") < optArr.indexOf("-b")){
+        content = n_cmdObj.nFunc(content);
+    }else{
+        content = b_cmdObj.bFunc(content);
+    }
+
+}else if(optArr.includes("-n")){
     content = n_cmdObj.nFunc(content);
-}
-if(optArr.includes("-b")){
+}else if(optArr.includes("-b")){
     content = b_cmdObj.bFunc(content);
 }
 
